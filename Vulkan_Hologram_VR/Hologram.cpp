@@ -797,8 +797,8 @@ void Hologram::on_mouse_move(int32_t x, int32_t y)
 	int32_t dy = (int32_t)mousePos_.y - y;
 	glm::vec3 center_vec(1.0f, 1.0f, 1.0f);   //center of the object cloud.
 	glm::vec3 forward_vec = camera_.eye_pos - camera_.look_pos;
+	glm::vec3 up_vec = camera_.up_vec;
 	bool handled = false;
-
 	//mouseMoved((float)x, (float)y, handled);
 
 	if (mouseButtons_.left) {
@@ -824,16 +824,18 @@ void Hologram::on_mouse_move(int32_t x, int32_t y)
 		camera_.up_vec = up_vec;
 		update_camera();
 		}
-	if (mouseButtons_.right) {/*
-		zoom += dy * .005f * zoomSpeed;
-		camera.translate(glm::vec3(-0.0f, 0.0f, dy * .005f * zoomSpeed));
-		viewUpdated = true;*/
+	if (mouseButtons_.right) {
+		camera_.look_pos = center_vec;
+		camera_.eye_pos = (center_vec + glm::vec3(4.0f, .0f, .0f));
+		update_camera();
 	}
-	if (mouseButtons_.middle) {/*
-		cameraPos.x -= dx * 0.01f;
-		cameraPos.y -= dy * 0.01f;
-		camera.translate(glm::vec3(-dx * 0.01f, -dy * 0.01f, 0.0f));
-		viewUpdated = true;*/
+
+	if (mouseButtons_.middle) {
+		glm::vec3 cross_vec = glm::normalize(glm::cross(up_vec, forward_vec));
+		glm::vec3 translation = (0.005f*dx*cross_vec - 0.005f*dy*up_vec);
+		camera_.eye_pos += translation;
+		camera_.look_pos += translation;
+		update_camera();
 	}
 	mousePos_.x = (float)x;
 	mousePos_.y = (float)y;
