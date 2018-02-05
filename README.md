@@ -5,7 +5,7 @@ GPL2 License
 
 you can manipulate of object clouds with mouse move (left click)
 
-<TO DO>
+/<TO DO>
   middle button zoom
   right button reset position
   
