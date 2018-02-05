@@ -147,7 +147,7 @@ LRESULT ShellWin32::handle_message(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lp
                     key = Game::KEY_DOWN;
                     break;
                 case VK_SPACE:
-                    key = Game::KEY_SPACE;
+                    key = Game::KEY_P;
                     break;
                 case 'F':
                 case 'f':
@@ -168,6 +168,10 @@ LRESULT ShellWin32::handle_message(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lp
 				case 'D':
 				case 'd':
 					key = Game::KEY_D;
+					break;
+				case 'P':
+				case 'p':
+					key = Game::KEY_P;
 					break;
                 default:
                     key = Game::KEY_UNKNOWN;

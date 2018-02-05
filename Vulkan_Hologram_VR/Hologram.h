@@ -106,7 +106,7 @@ class Hologram : public Game {
 		glm::vec3 look_pos;
         glm::mat4 view_projection;
 		glm::vec3 up_vec;
-        Camera() : eye_pos(3.5f,1.0f,1.0f),look_pos(1.0f),up_vec(0.0f,0.0f,1.0f) {}
+        Camera() : eye_pos(5.0f,1.0f,1.0f),look_pos(1.0f),up_vec(0.0f,0.0f,1.0f) {}
     };
 
     struct FrameData {

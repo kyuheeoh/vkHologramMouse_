@@ -799,15 +799,16 @@ void Hologram::on_mouse_move(int32_t x, int32_t y)
 	glm::vec3 forward_vec = camera_.eye_pos - camera_.look_pos;
 	glm::vec3 up_vec = camera_.up_vec;
 	bool handled = false;
+
 	//mouseMoved((float)x, (float)y, handled);
 
 	if (mouseButtons_.left) {
 		glm::vec3 eye_pos = camera_.eye_pos;
 		glm::vec3 look_pos = camera_.look_pos;
-		glm::vec3 up_vec = camera_.up_vec;
-		glm::vec3 cross_vec = glm::normalize(glm::cross(up_vec, forward_vec));
+		
+		glm::vec3 cross_vec = glm::normalize(glm::cross(forward_vec, up_vec));
 
-		glm::mat3 rotMx = get_RotM(0.001*dx, up_vec.x,up_vec.y,up_vec.z);
+		glm::mat3 rotMx = get_RotM(-0.001*dx, up_vec.x,up_vec.y,up_vec.z);
 		glm::mat3 rotMy = get_RotM(0.001*dy,cross_vec.x,cross_vec.y,cross_vec.z);
 			
 		//
@@ -824,6 +825,7 @@ void Hologram::on_mouse_move(int32_t x, int32_t y)
 		camera_.up_vec = up_vec;
 		update_camera();
 		}
+
 	if (mouseButtons_.right) {
 		camera_.look_pos = center_vec;
 		camera_.eye_pos = (center_vec + glm::vec3(4.0f, .0f, .0f));
